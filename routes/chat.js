@@ -54,11 +54,12 @@ router.post("/", async (req, res) => {
         query_embedding: questionEmbedding,
         match_business_id: businessId,
         match_count: 4,        // Top 4 most relevant chunks
-        match_threshold: 0.50, // Minimum similarity score
+        match_threshold: 0.4, // Minimum similarity score
       }
     );
 
     if (searchError) throw searchError;
+    console.log("Chunks found:", chunks?.length, "| Query:", message);
 
     // ── Step 4: Build the context string ─────────────────────
     const context = chunks && chunks.length > 0
@@ -134,7 +135,12 @@ ${context ? `KNOWLEDGE BASE — use this to answer the customer's question:
 ${context}
 """
 
-IMPORTANT: Only answer using the information above. If the answer isn't in the knowledge base, use your fallback response.` 
+IMPORTANT: Use the knowledge base above to answer. If the answer isn't stated directly, 
+use logical reasoning from what you do know. For example, if you know the business is 
+based in Pune, Maharashtra, you can correctly answer that it is located in India.
+Only use the fallback response if the question is completely unrelated to the business 
+and cannot be reasonably inferred from any available information.` 
+
 : `No specific knowledge found for this question.`}
 
 FALLBACK RULE:
