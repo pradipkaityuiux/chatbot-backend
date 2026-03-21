@@ -59,7 +59,6 @@ router.post("/", async (req, res) => {
     );
 
     if (searchError) throw searchError;
-    console.log("Chunks found:", chunks?.length, "| Query:", message);
 
     // ── Step 4: Build the context string ─────────────────────
     const context = chunks && chunks.length > 0
