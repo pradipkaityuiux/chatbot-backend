@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot Test</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f8fafc;
+      padding: 60px 40px;
+      color: #334155;
+    }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    p { color: #64748b; max-width: 500px; line-height: 1.6; }
+    .note {
+      margin-top: 30px;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: #92400e;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Shop</h1>
+  <p>
+    This is a test page. The chat bubble should appear in the
+    bottom-right corner. Make sure your backend is running on
+    localhost:3001 before testing.
+  </p>
+  <div class="note">
+    <strong>Make sure:</strong><br>
+    1. Your terminal is running <code>node server.js</code><br>
+    2. You have added knowledge for <code>test-shop</code> in the admin panel<br>
+    3. Your .env has real API keys filled in
+  </div>
+
+  <script
+    src="http://localhost:3001/widget/chatbot.js"
+    data-business-id="demo-plumbing"
+  ></script>
+</body>
+</html>
