@@ -107,15 +107,7 @@
         gap: 10px; cursor: pointer;
         animation: cb-pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
-      #cb-bubble-btn {
-        width: 58px; height: 58px;
-        border-radius: ${isSquare ? "16px" : "50%"};
-        border: none; background: var(--cb-primary); color: white;
-        cursor: pointer; display: flex; align-items: center; justify-content: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-        transition: transform 0.2s, box-shadow 0.2s;
-        flex-shrink: 0; overflow: hidden; padding: 0;
-      }
+      #cb-bubble-btn { width: 58px; height: 58px; border-radius: ${isSquare ? "16px" : "50%"}; border: none; background: var(--cb-primary); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.25); transition: transform 0.2s, box-shadow 0.2s; flex-shrink: 0; overflow: hidden; padding: 0; animation: cb-shake 2.5s ease-in-out 3s infinite; }
       #cb-bubble-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,0,0,0.3); }
       #cb-bubble-btn img { width: 100%; height: 100%; object-fit: cover; }
       #cb-bubble-btn .cb-emoji { font-size: 26px; line-height: 1; }
@@ -186,6 +178,7 @@
       #cb-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
       #cb-footer { text-align: center; padding: 5px 0 10px; font-size: 11px; color: var(--cb-text-dim); background: var(--cb-bg); flex-shrink: 0; }
       @keyframes cb-pop-in { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      @keyframes cb-shake { 0%, 100% { transform: rotate(0deg); } 15% { transform: rotate(-8deg); } 30% { transform: rotate(8deg); } 45% { transform: rotate(-6deg); } 60% { transform: rotate(6deg); } 75% { transform: rotate(-3deg); } 90% { transform: rotate(3deg); } }
       @keyframes cb-msg-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes cb-bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
       @keyframes cb-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
