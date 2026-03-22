@@ -6,21 +6,11 @@ const { embed } = require("../lib/embeddings");
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-/**
- * POST /api/chat
- * 
- * Called by the widget on the client's website.
- * 
- * Body:
- * {
- *   businessId: "acme-plumbing",
- *   message: "Do you offer emergency services?",
- *   history: [                          // Optional — last few messages for context
- *     { role: "user", content: "Hello" },
- *     { role: "assistant", content: "Hi! How can I help?" }
- *   ]
- * }
- */
+// ── Config cache — avoids Supabase hit on every request ───────
+const configCache = new Map(); // { businessId: { data: config, cachedAt: timestamp } }
+const invalidAttempts = new Map(); // { ip: count }
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 router.post("/", async (req, res) => {
   const { businessId, message, history = [] } = req.body;
 
@@ -33,43 +23,82 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    // ── Step 1: Fetch this business's config ─────────────────
-    const { data: config, error: configError } = await supabase
-      .from("business_configs")
-      .select("*")
-      .eq("business_id", businessId)
-      .single();
+    // ── Step 1: Fetch business config (with cache) ────────────
+    let config = null;
+    const cached = configCache.get(businessId);
 
-    if (configError || !config) {
-      return res.status(404).json({ error: "Business not found." });
+    if (cached && Date.now() - cached.cachedAt < CACHE_TTL) {
+      // Serve from cache — no DB hit
+      config = cached.data;
+    } else {
+      // Cache miss or expired — fetch from Supabase
+      const { data, error: configError } = await supabase
+        .from("business_configs")
+        .select("*")
+        .eq("business_id", businessId)
+        .single();
+
+      if (configError || !data) {
+        // Track invalid businessId attempts per IP
+        const ip = req.ip;
+        const attempts = (invalidAttempts.get(ip) || 0) + 1;
+        invalidAttempts.set(ip, attempts);
+
+        // Block IP after 5 invalid attempts
+        if (attempts >= 5) {
+          return res.status(429).json({ error: "Too many invalid requests." });
+        }
+
+        return res.status(404).json({ error: "Business not found." });
+      }
+
+      config = data;
+      configCache.set(businessId, { data: config, cachedAt: Date.now() });
     }
 
-    // ── Step 2: Embed the customer's question ────────────────
+    // ── Step 2: Embed the question ───────────────────────────
     const questionEmbedding = await embed(message);
 
-    // ── Step 3: Find the most relevant knowledge chunks ──────
-    const { data: chunks, error: searchError } = await supabase.rpc(
-      "match_chunks",
-      {
+    // ── Step 3: Vector search with retry ─────────────────────
+    // Lower threshold on first message — cold queries need more room
+    const isFirstMessage = history.length === 0;
+    const threshold = isFirstMessage ? 0.25 : 0.45;
+
+    let chunks = null;
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      const result = await supabase.rpc("match_chunks", {
         query_embedding: questionEmbedding,
         match_business_id: businessId,
-        match_count: 4,        // Top 4 most relevant chunks
-        match_threshold: 0.4, // Minimum similarity score
+        match_count: 4,
+        match_threshold: threshold,
+      });
+
+      if (result.error) throw result.error;
+
+      if (result.data && result.data.length > 0) {
+        chunks = result.data;
+        break;
       }
-    );
 
-    if (searchError) throw searchError;
+      if (attempt === 1) {
+        await new Promise(r => setTimeout(r, 800));
+      }
+    }
 
-    // ── Step 4: Build the context string ─────────────────────
+    if (!chunks || chunks.length === 0) {
+      console.log(`[Chat] WARNING: No context found for "${message}" | businessId: ${businessId}`);
+    }
+
+    // ── Step 4: Build context string ─────────────────────────
     const context = chunks && chunks.length > 0
       ? chunks.map((c) => c.content).join("\n\n---\n\n")
       : null;
 
-    // ── Step 5: Build the system prompt ──────────────────────
+    // ── Step 5: Build system prompt ───────────────────────────
     const systemPrompt = buildSystemPrompt(config, context);
 
-    // ── Step 6: Build conversation history for Claude ────────
-    // Keep last 6 messages to stay within a reasonable context window
+    // ── Step 6: Build message history ────────────────────────
     const recentHistory = history.slice(-6).map((msg) => ({
       role: msg.role,
       content: msg.content,
@@ -93,7 +122,6 @@ router.post("/", async (req, res) => {
     res.json({
       reply,
       businessId,
-      // Return whether we found relevant knowledge (useful for debugging)
       hasContext: chunks && chunks.length > 0,
     });
 
@@ -106,16 +134,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-/**
- * Builds the system prompt dynamically per business.
- * This is what makes each chatbot feel unique to that brand.
- */
 function buildSystemPrompt(config, context) {
   const {
     business_name,
     business_type,
-    tone,           // "friendly" | "professional" | "casual"
-    primary_color,  // Not used here but stored for the widget
+    tone,
     fallback_message,
     contact_email,
     business_hours,
@@ -129,18 +152,18 @@ Communicate in a ${tone} tone. Be helpful, clear, and concise.
 Keep responses short — 2 to 4 sentences unless the question needs more detail.
 Never use bullet points unless the customer is asking for a list.
 
-${context ? `KNOWLEDGE BASE — use this to answer the customer's question:
+${context
+  ? `KNOWLEDGE BASE — use this to answer the customer's question:
 """
 ${context}
 """
 
-IMPORTANT: Use the knowledge base above to answer. If the answer isn't stated directly, 
-use logical reasoning from what you do know. For example, if you know the business is 
+IMPORTANT: Use the knowledge base above to answer. If the answer is not stated directly,
+use logical reasoning from what you do know. For example if you know the business is
 based in Pune, Maharashtra, you can correctly answer that it is located in India.
-Only use the fallback response if the question is completely unrelated to the business 
-and cannot be reasonably inferred from any available information.` 
-
-: `No specific knowledge found for this question.`}
+Only use the fallback response if the question is completely unrelated to the business
+and cannot be reasonably inferred from any available information.`
+  : `No specific knowledge found for this question.`}
 
 FALLBACK RULE:
 If you don't know the answer or the question is outside your knowledge, say exactly this:

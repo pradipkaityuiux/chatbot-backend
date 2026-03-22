@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
 
     if (notifyEmail && process.env.RESEND_API_KEY) {
       await resend.emails.send({
-        from: "leads@drivom.in", // must be a verified domain in Resend
+        from: "leads@zerochatbot.com", // must be a verified domain in Resend
         to: notifyEmail,
         subject: `New lead from your chatbot — ${name || email}`,
         html: `

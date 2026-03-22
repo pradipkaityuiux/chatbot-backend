@@ -41,6 +41,10 @@ router.post("/", async (req, res) => {
 
     for (const chunk of chunks) {
       const embedding = await embed(chunk);
+      if (!embedding || embedding.length !== 1536) {
+        console.error(`Bad embedding for chunk — skipping`);
+        continue;
+      }
       rows.push({
         business_id: businessId,
         content: chunk,
@@ -50,6 +54,11 @@ router.post("/", async (req, res) => {
     }
 
     // Batch insert into Supabase
+    if (rows.length === 0) {
+      return res.status(400).json({
+        error: "No valid chunks to store. All embeddings failed validation.",
+      });
+    }
     const { error } = await supabase
       .from("knowledge_chunks")
       .insert(rows);
