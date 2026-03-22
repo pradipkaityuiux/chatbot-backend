@@ -7,6 +7,8 @@ const chatRoute = require("./routes/chat");
 const ingestRoute = require("./routes/ingest");
 const configRoute = require("./routes/config");
 const adminRoute = require("./routes/admin");
+const leadsRoute = require("./routes/leads");
+const portalRoute = require("./routes/portal");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -38,7 +40,10 @@ app.use("/api/chat", chatLimiter, chatRoute);
 app.use("/api/ingest", ingestLimiter, ingestRoute);
 app.use("/api/config", configRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/leads", leadsRoute);
+app.use("/api/portal", portalRoute);
 
+app.use("/portal", express.static(__dirname + "/portal"));
 app.use("/widget", express.static(__dirname + "/widget"));
 app.use("/admin", express.static(__dirname + "/admin"));
 

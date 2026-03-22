@@ -28,6 +28,8 @@
   let isOpen = false;
   let isLoading = false;
   let conversationHistory = [];
+  let messageCount = 0;
+  let leadCaptured = false;
 
   let config = {
     business_name: "Support",
@@ -47,6 +49,11 @@
     show_online_status: true,
     chat_bg_color: null,
     bot_bubble_color: null,
+    lead_capture_enabled: false,
+    lead_capture_trigger: 'after_messages',
+    lead_capture_after: 3,
+    lead_capture_heading: 'Before I continue...',
+    lead_capture_subtext: 'Leave your details and we\'ll follow up personally.',
   };
 
   const fontMap = {
@@ -73,7 +80,7 @@
       --cb-surface: ${dark ? "#16213e" : "#f8fafc"};
       --cb-border: ${dark ? "#2a2a45" : "#e2e8f0"};
       --cb-text: ${dark ? "#e8e8f0" : "#1e293b"};
-      --cb-text-dim: ${dark ? "#6b7280" : "#94a3b8"};
+      --cb-text-dim: ${dark ? "#e3e8f4" : "#373a3f"};
       --cb-user-bubble: ${config.primary_color};
       --cb-user-text: #ffffff;
       --cb-bot-bubble: ${config.bot_bubble_color || (dark ? "#0f3460" : config.secondary_color)};
@@ -190,6 +197,85 @@
     document.head.appendChild(style);
   }
 
+  function showLeadForm() {
+    if (leadCaptured) return;
+    const messagesEl = document.getElementById("cb-messages");
+    const form = document.createElement("div");
+    form.id = "cb-lead-form";
+    form.className = "cb-msg cb-msg-bot";
+    form.style.maxWidth = "100%";
+    form.innerHTML = `
+      <div style="
+        background: var(--cb-bot-bubble);
+        border: 1px solid var(--cb-border);
+        border-radius: 14px;
+        border-bottom-left-radius: 4px;
+        padding: 16px;
+        width: 100%;
+      ">
+        <div style="font-weight: 600; font-size: 14px; color: var(--cb-text); margin-bottom: 4px;">
+          ${config.lead_capture_heading}
+        </div>
+        <div style="font-size: 12px; color: var(--cb-text-dim); margin-bottom: 12px;">
+          ${config.lead_capture_subtext}
+        </div>
+        <input id="cb-lead-name" placeholder="Your name"
+          style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--cb-border);
+          background:var(--cb-input-bg); color:var(--cb-text); font-size:13px; margin-bottom:8px; outline:none;" />
+        <input id="cb-lead-email" placeholder="Email address" type="email"
+          style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--cb-border);
+          background:var(--cb-input-bg); color:var(--cb-text); font-size:13px; margin-bottom:8px; outline:none;" />
+        <input id="cb-lead-phone" placeholder="Phone number (optional)"
+          style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--cb-border);
+          background:var(--cb-input-bg); color:var(--cb-text); font-size:13px; margin-bottom:10px; outline:none;" />
+        <button id="cb-lead-submit"
+          style="width:100%; background:var(--cb-primary); color:white; border:none;
+          padding:9px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer;">
+          Send My Details →
+        </button>
+      </div>
+    `;
+    messagesEl.appendChild(form);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    document.getElementById("cb-lead-submit").addEventListener("click", submitLead);
+  }
+
+  async function submitLead() {
+    const name = document.getElementById("cb-lead-name")?.value.trim();
+    const email = document.getElementById("cb-lead-email")?.value.trim();
+    const phone = document.getElementById("cb-lead-phone")?.value.trim();
+
+    if (!email) {
+      document.getElementById("cb-lead-email").style.borderColor = "red";
+      return;
+    }
+
+    try {
+      await fetch(`${API_BASE}/api/leads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          businessId: BUSINESS_ID,
+          name, email, phone,
+          message: conversationHistory.slice(-1)[0]?.content || ""
+        }),
+      });
+
+      // Replace form with thank you message
+      const form = document.getElementById("cb-lead-form");
+      if (form) {
+        form.innerHTML = `
+          <div class="cb-bubble-text" style="background:var(--cb-bot-bubble); color:var(--cb-bot-text);">
+            ✅ Got it! We'll be in touch shortly.
+          </div>`;
+      }
+      leadCaptured = true;
+    } catch {
+      addMessage("bot", "Sorry, couldn't save your details. Please try again.");
+    }
+  }
+
   function buildBubbleContent() {
   // avatar_url is specifically for the bubble — always takes priority
   if (config.avatar_url) return `<img src="${config.avatar_url}" alt="avatar" />`;
@@ -209,6 +295,7 @@
   }
 
   function buildWidget() {
+    const dark = config.theme === "dark";
     const wrapper = document.createElement("div");
     wrapper.id = "cb-widget";
     wrapper.innerHTML = `
@@ -234,7 +321,7 @@
             </svg>
           </button>
         </div>
-        ${config.show_branding ? `<div id="cb-footer">Powered by AI · Responses may not always be accurate</div>` : ""}
+        ${config.show_branding ? `<div id="cb-footer">Powered by <a href="https://zerochatbot.com" target="_blank" rel="noopener" style="color: ${dark ? "#d6e6ff" : "var(--cb-primary)"}; text-decoration: none; font-weight: 500;">ZeroChatbot</a></div>` : ""}
       </div>
     `;
     document.body.appendChild(wrapper);
@@ -272,6 +359,14 @@
     input.style.height = "auto";
     addMessage("user", message);
     conversationHistory.push({ role: "user", content: message });
+    messageCount++;
+    // Check if we should show the lead form
+    if (config.lead_capture_enabled && !leadCaptured) {
+      if (config.lead_capture_trigger === "after_messages" && messageCount >= config.lead_capture_after) {
+        setTimeout(showLeadForm, 1000);
+      }
+    }
+
     isLoading = true;
     sendBtn.disabled = true;
     showTyping();

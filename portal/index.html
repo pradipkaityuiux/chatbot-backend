@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Syne:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            font-size: 14px;
+        }
+
+        #login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            width: 360px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .login-sub {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        #app {
+            display: none;
+        }
+
+        .topbar {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .topbar-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .topbar-sub {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .main {
+            padding: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 10px;
+            width: fit-content;
+        }
+
+        .tab {
+            padding: 8px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #64748b;
+            border: none;
+            background: none;
+            transition: all 0.15s;
+        }
+
+        .tab.active {
+            background: white;
+            color: #1e293b;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .section-sub {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px 22px;
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .stat-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #94a3b8;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .chunk-text {
+            max-width: 500px;
+            color: #475569;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 60px;
+            color: #94a3b8;
+        }
+
+        .empty .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+            outline: none;
+            font-family: 'DM Sans', sans-serif;
+            transition: border-color 0.2s;
+            background: white;
+            color: #1e293b;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.15s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+
+        #login-error {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 20px 0;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 999;
+        }
+
+        #toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-title">Client Portal</div>
+            <div class="login-sub">Enter your access token to view your leads and manage content.</div>
+            <div class="form-group">
+                <label>Access Token</label>
+                <input type="password" id="token-input" placeholder="Your client token" />
+            </div>
+            <div class="form-group">
+                <label>Backend URL</label>
+                <input type="text" id="url-input" value="http://localhost:3001" />
+            </div>
+            <hr class="divider" />
+            <button class="btn btn-primary btn-full" onclick="handleLogin()">Access Portal →</button>
+            <div id="login-error">Invalid token. Please check and try again.</div>
+        </div>
+    </div>
+
+    <div id="app">
+        <div class="topbar">
+            <div>
+                <div class="topbar-name" id="topbar-name">Client Portal</div>
+                <div class="topbar-sub">Your chatbot dashboard</div>
+            </div>
+            <button class="btn" style="border:1px solid #e2e8f0; background:white;" onclick="handleLogout()">Sign
+                out</button>
+        </div>
+
+        <div class="main">
+            <div class="tabs">
+                <button class="tab active" onclick="showSection('leads')">Leads</button>
+                <button class="tab" onclick="showSection('knowledge')">Knowledge Base</button>
+            </div>
+
+            <!-- Leads Section -->
+            <div class="section active" id="section-leads">
+                <div class="section-title">Your Leads</div>
+                <div class="section-sub">Everyone who left their details through your chatbot</div>
+                <div class="stat-row">
+                    <div class="stat">
+                        <div class="stat-label">Total Leads</div>
+                        <div class="stat-value" id="leads-count">—</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">This Month</div>
+                        <div class="stat-value" id="leads-month">—</div>
+                    </div>
+                </div>
+                <div id="leads-table-wrap"></div>
+            </div>
+
+            <!-- Knowledge Section -->
+            <div class="section" id="section-knowledge">
+                <div class="section-title">Knowledge Base</div>
+                <div class="section-sub">Content your chatbot uses to answer questions</div>
+                <div id="knowledge-table-wrap"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+        let API = "";
+        let TOKEN = "";
+        let businessName = "";
+
+        async function handleLogin() {
+            TOKEN = document.getElementById("token-input").value.trim();
+            API = document.getElementById("url-input").value.trim().replace(/\/$/, "");
+            const errEl = document.getElementById("login-error");
+
+            try {
+                const res = await fetch(`${API}/api/portal/verify/${TOKEN}`);
+                if (!res.ok) { errEl.style.display = "block"; return; }
+                const data = await res.json();
+                businessName = data.business_name;
+                errEl.style.display = "none";
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("app").style.display = "block";
+                document.getElementById("topbar-name").textContent = businessName;
+                loadLeads();
+            } catch {
+                errEl.style.display = "block";
+            }
+        }
+
+        document.getElementById("token-input").addEventListener("keydown", e => {
+            if (e.key === "Enter") handleLogin();
+        });
+
+        function handleLogout() {
+            TOKEN = ""; API = "";
+            document.getElementById("app").style.display = "none";
+            document.getElementById("login-screen").style.display = "flex";
+        }
+
+        function showSection(name) {
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+            document.getElementById(`section-${name}`).classList.add("active");
+            event.target.classList.add("active");
+            if (name === "leads") loadLeads();
+            if (name === "knowledge") loadKnowledge();
+        }
+
+        async function loadLeads() {
+            const res = await fetch(`${API}/api/portal/leads/${TOKEN}`);
+            const data = await res.json();
+            const leads = data.leads || [];
+
+            document.getElementById("leads-count").textContent = leads.length;
+
+            const thisMonth = leads.filter(l => {
+                const d = new Date(l.created_at);
+                const now = new Date();
+                return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+            }).length;
+            document.getElementById("leads-month").textContent = thisMonth;
+
+            const wrap = document.getElementById("leads-table-wrap");
+            if (!leads.length) {
+                wrap.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No leads yet. They'll appear here as visitors fill out the form.</p></div>`;
+                return;
+            }
+
+            wrap.innerHTML = `
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Message</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${leads.map(l => `
+          <tr>
+            <td>${l.name || "—"}</td>
+            <td><a href="mailto:${l.email}" style="color:#2563eb;">${l.email}</a></td>
+            <td>${l.phone || "—"}</td>
+            <td style="max-width:200px; color:#475569;">${l.message || "—"}</td>
+            <td style="white-space:nowrap; color:#94a3b8;">${new Date(l.created_at).toLocaleDateString()}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>`;
+        }
+
+        async function loadKnowledge() {
+            const res = await fetch(`${API}/api/portal/knowledge/${TOKEN}`);
+            const data = await res.json();
+            const chunks = data.chunks || [];
+
+            const wrap = document.getElementById("knowledge-table-wrap");
+            if (!chunks.length) {
+                wrap.innerHTML = `<div class="empty"><div class="icon">📚</div><p>No content added yet.</p></div>`;
+                return;
+            }
+
+            wrap.innerHTML = `
+    <table>
+      <thead>
+        <tr><th>Source</th><th>Content</th><th>Added</th></tr>
+      </thead>
+      <tbody>
+        ${chunks.map(c => `
+          <tr>
+            <td><span class="badge badge-blue">${c.source}</span></td>
+            <td><div class="chunk-text">${c.content}</div></td>
+            <td style="white-space:nowrap; color:#94a3b8;">${new Date(c.created_at).toLocaleDateString()}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>`;
+        }
+
+        let toastTimer;
+        function showToast(msg) {
+            const el = document.getElementById("toast");
+            el.textContent = msg;
+            el.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => el.classList.remove("show"), 3000);
+        }
+    </script>
+</body>
+
+</html>

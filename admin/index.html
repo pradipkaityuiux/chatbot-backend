@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chatbot Admin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       --bg: #0a0a0f;
@@ -23,7 +26,11 @@
       --radius: 10px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background: var(--bg);
@@ -75,7 +82,9 @@
 
     .sidebar {
       position: fixed;
-      left: 0; top: 0; bottom: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
       width: 220px;
       background: var(--surface);
       border-right: 1px solid var(--border);
@@ -131,9 +140,21 @@
       text-align: left;
     }
 
-    .nav-item:hover { background: var(--surface2); color: var(--text); }
-    .nav-item.active { background: var(--accent-dim); color: var(--accent); }
-    .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
+    .nav-item:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .nav-item .icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
 
     .sidebar-bottom {
       padding: 16px 12px;
@@ -147,12 +168,25 @@
     }
 
     /* ── Pages ──────────────────────────────────────────── */
-    .page { display: none; animation: fade-in 0.2s ease; }
-    .page.active { display: block; }
+    .page {
+      display: none;
+      animation: fade-in 0.2s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
 
     @keyframes fade-in {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── Typography ─────────────────────────────────────── */
@@ -214,7 +248,9 @@
       position: relative;
     }
 
-    .client-card:hover { border-color: var(--accent); }
+    .client-card:hover {
+      border-color: var(--accent);
+    }
 
     .client-card-header {
       display: flex;
@@ -266,8 +302,17 @@
       color: var(--text-dim);
     }
 
-    .tag.green { border-color: var(--success); color: var(--success); background: #10b98115; }
-    .tag.blue { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+    .tag.green {
+      border-color: var(--success);
+      color: var(--success);
+      background: #10b98115;
+    }
+
+    .tag.blue {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
 
     .client-actions {
       display: flex;
@@ -294,7 +339,9 @@
       color: white;
     }
 
-    .btn-primary:hover { background: #4f46e5; }
+    .btn-primary:hover {
+      background: #4f46e5;
+    }
 
     .btn-ghost {
       background: transparent;
@@ -302,7 +349,10 @@
       border: 1px solid var(--border);
     }
 
-    .btn-ghost:hover { background: var(--surface2); color: var(--text); }
+    .btn-ghost:hover {
+      background: var(--surface2);
+      color: var(--text);
+    }
 
     .btn-danger {
       background: transparent;
@@ -310,10 +360,19 @@
       border: 1px solid var(--danger)30;
     }
 
-    .btn-danger:hover { background: #ef444415; }
+    .btn-danger:hover {
+      background: #ef444415;
+    }
 
-    .btn-sm { padding: 5px 10px; font-size: 12px; }
-    .btn-full { width: 100%; justify-content: center; }
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .btn-full {
+      width: 100%;
+      justify-content: center;
+    }
 
     /* ── Forms ──────────────────────────────────────────── */
     .form-grid {
@@ -328,7 +387,9 @@
       gap: 6px;
     }
 
-    .form-group.full { grid-column: 1 / -1; }
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
 
     label {
       font-size: 12px;
@@ -338,7 +399,9 @@
       letter-spacing: 0.06em;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -351,7 +414,9 @@
       width: 100%;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus,
+    select:focus,
+    textarea:focus {
       border-color: var(--accent);
     }
 
@@ -361,9 +426,14 @@
       cursor: pointer;
     }
 
-    textarea { resize: vertical; min-height: 100px; }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
 
-    select option { background: var(--surface2); }
+    select option {
+      background: var(--surface2);
+    }
 
     .color-row {
       display: flex;
@@ -371,7 +441,10 @@
       gap: 10px;
     }
 
-    .color-row input[type="text"] { flex: 1; font-family: 'DM Mono', monospace; }
+    .color-row input[type="text"] {
+      flex: 1;
+      font-family: 'DM Mono', monospace;
+    }
 
     /* ── Panel / Card ───────────────────────────────────── */
     .panel {
@@ -411,13 +484,18 @@
       transition: all 0.15s;
     }
 
-    .source-btn:hover, .source-btn.active {
+    .source-btn:hover,
+    .source-btn.active {
       border-color: var(--accent);
       color: var(--accent);
       background: var(--accent-dim);
     }
 
-    .source-btn .icon { display: block; font-size: 20px; margin-bottom: 4px; }
+    .source-btn .icon {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
 
     /* ── Chunks List ────────────────────────────────────── */
     .chunks-list {
@@ -462,7 +540,7 @@
       border-radius: 10px;
       padding: 14px 18px;
       font-size: 13px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
       transform: translateY(80px);
       opacity: 0;
       transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -470,15 +548,24 @@
       max-width: 320px;
     }
 
-    #toast.show { transform: translateY(0); opacity: 1; }
-    #toast.success { border-color: var(--success); }
-    #toast.error { border-color: var(--danger); }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    #toast.success {
+      border-color: var(--success);
+    }
+
+    #toast.error {
+      border-color: var(--danger);
+    }
 
     /* ── Modal ──────────────────────────────────────────── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0, 0, 0, 0.7);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -489,7 +576,10 @@
       transition: opacity 0.2s;
     }
 
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
 
     .modal {
       background: var(--surface);
@@ -504,7 +594,9 @@
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .modal-overlay.open .modal { transform: scale(1); }
+    .modal-overlay.open .modal {
+      transform: scale(1);
+    }
 
     .modal-header {
       display: flex;
@@ -547,6 +639,37 @@
       position: relative;
     }
 
+    .modal-tab {
+      padding: 7px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-dim);
+      border: none;
+      background: none;
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .modal-tab:hover {
+      color: var(--text);
+    }
+
+    .modal-tab.active {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-section {
+      display: none;
+    }
+
+    .modal-section.active {
+      display: block;
+    }
+
     .copy-btn {
       position: absolute;
       top: 8px;
@@ -561,183 +684,239 @@
       font-family: 'DM Sans', sans-serif;
     }
 
-    .copy-btn:hover { color: var(--text); }
+    .copy-btn:hover {
+      color: var(--text);
+    }
 
     /* ── Misc ───────────────────────────────────────────── */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
-    .flex { display: flex; }
-    .items-center { align-items: center; }
-    .justify-between { justify-content: space-between; }
-    .gap-2 { gap: 8px; }
-    .gap-3 { gap: 12px; }
-    .mb-4 { margin-bottom: 16px; }
-    .mt-4 { margin-top: 16px; }
-    .text-dim { color: var(--text-dim); }
-    .text-success { color: var(--success); }
-    .text-danger { color: var(--danger); }
-    .mono { font-family: 'DM Mono', monospace; }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .gap-2 {
+      gap: 8px;
+    }
+
+    .gap-3 {
+      gap: 12px;
+    }
+
+    .mb-4 {
+      margin-bottom: 16px;
+    }
+
+    .mt-4 {
+      margin-top: 16px;
+    }
+
+    .text-dim {
+      color: var(--text-dim);
+    }
+
+    .text-success {
+      color: var(--success);
+    }
+
+    .text-danger {
+      color: var(--danger);
+    }
+
+    .mono {
+      font-family: 'DM Mono', monospace;
+    }
+
     .empty-state {
       text-align: center;
       padding: 60px 20px;
       color: var(--text-dim);
     }
-    .empty-state .big { font-size: 40px; margin-bottom: 10px; }
+
+    .empty-state .big {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
     .spinner {
-      width: 18px; height: 18px;
+      width: 18px;
+      height: 18px;
       border: 2px solid var(--border);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
       display: inline-block;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
+
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════════════════
   LOGIN SCREEN
 ══════════════════════════════════════════════════════════════ -->
-<div id="login-screen">
-  <div class="login-card">
-    <div class="login-logo">ChatOS</div>
-    <div class="login-sub">Agency Admin Dashboard</div>
-    <div class="form-group" style="margin-bottom: 16px;">
-      <label>Admin Secret</label>
-      <input type="password" id="login-secret" placeholder="Enter your admin secret" />
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">ChatOS</div>
+      <div class="login-sub">Agency Admin Dashboard</div>
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>Admin Secret</label>
+        <input type="password" id="login-secret" placeholder="Enter your admin secret" />
+      </div>
+      <div class="form-group" style="margin-bottom: 0;">
+        <label>Backend URL</label>
+        <input type="text" id="login-url" value="http://localhost:3001"
+          placeholder="https://your-backend.railway.app" />
+      </div>
+      <hr class="divider" />
+      <button class="btn btn-primary btn-full" onclick="handleLogin()">Sign In →</button>
+      <div id="login-error" style="color: var(--danger); font-size: 12px; margin-top: 12px; display: none;"></div>
     </div>
-    <div class="form-group" style="margin-bottom: 0;">
-      <label>Backend URL</label>
-      <input type="text" id="login-url" value="http://localhost:3001" placeholder="https://your-backend.railway.app" />
-    </div>
-    <hr class="divider" />
-    <button class="btn btn-primary btn-full" onclick="handleLogin()">Sign In →</button>
-    <div id="login-error" style="color: var(--danger); font-size: 12px; margin-top: 12px; display: none;"></div>
   </div>
-</div>
 
-<!-- ═══════════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════════════════
   MAIN APP
 ══════════════════════════════════════════════════════════════ -->
-<div id="app">
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="sidebar-logo">
-      ChatOS
-      <span>Agency Admin</span>
-    </div>
-    <nav class="nav">
-      <button class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard">
-        <span class="icon">⬡</span> Dashboard
-      </button>
-      <button class="nav-item" onclick="showPage('clients')" id="nav-clients">
-        <span class="icon">◈</span> Clients
-      </button>
-      <button class="nav-item" onclick="showPage('ingest')" id="nav-ingest">
-        <span class="icon">⊕</span> Add Content
-      </button>
-      <button class="nav-item" onclick="showPage('embed')" id="nav-embed">
-        <span class="icon">◻</span> Embed Code
-      </button>
-    </nav>
-    <div class="sidebar-bottom">
-      <button class="btn btn-ghost btn-full btn-sm" onclick="handleLogout()">Sign out</button>
-    </div>
-  </div>
-
-  <!-- Main content -->
-  <div class="main">
-
-    <!-- ── Dashboard ───────────────────────────────────── -->
-    <div class="page active" id="page-dashboard">
-      <div class="page-title">Dashboard</div>
-      <div class="page-sub">Overview of all your chatbot clients</div>
-
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-label">Total Clients</div>
-          <div class="stat-value" id="stat-clients">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Knowledge Chunks</div>
-          <div class="stat-value" id="stat-chunks">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Active This Month</div>
-          <div class="stat-value" id="stat-active">—</div>
-        </div>
+  <div id="app">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        ChatOS
+        <span>Agency Admin</span>
       </div>
-
-      <div class="panel">
-        <div class="panel-title">Recent Clients</div>
-        <div id="dashboard-clients-list">
-          <div class="empty-state"><div class="spinner"></div></div>
-        </div>
+      <nav class="nav">
+        <button class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard">
+          <span class="icon">⬡</span> Dashboard
+        </button>
+        <button class="nav-item" onclick="showPage('clients')" id="nav-clients">
+          <span class="icon">◈</span> Clients
+        </button>
+        <button class="nav-item" onclick="showPage('ingest')" id="nav-ingest">
+          <span class="icon">⊕</span> Add Content
+        </button>
+        <button class="nav-item" onclick="showPage('embed')" id="nav-embed">
+          <span class="icon">◻</span> Embed Code
+        </button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="btn btn-ghost btn-full btn-sm" onclick="handleLogout()">Sign out</button>
       </div>
     </div>
 
-    <!-- ── Clients ──────────────────────────────────────── -->
-    <div class="page" id="page-clients">
-      <div class="flex items-center justify-between mb-4">
-        <div>
-          <div class="page-title">Clients</div>
-          <div class="page-sub">Manage all your chatbot clients</div>
+    <!-- Main content -->
+    <div class="main">
+
+      <!-- ── Dashboard ───────────────────────────────────── -->
+      <div class="page active" id="page-dashboard">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Overview of all your chatbot clients</div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Total Clients</div>
+            <div class="stat-value" id="stat-clients">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Knowledge Chunks</div>
+            <div class="stat-value" id="stat-chunks">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Active This Month</div>
+            <div class="stat-value" id="stat-active">—</div>
+          </div>
         </div>
-        <button class="btn btn-primary" onclick="openNewClientModal()">+ New Client</button>
-      </div>
-      <div class="clients-grid" id="clients-grid">
-        <div class="empty-state"><div class="spinner"></div></div>
-      </div>
-    </div>
 
-    <!-- ── Ingest ───────────────────────────────────────── -->
-    <div class="page" id="page-ingest">
-      <div class="page-title">Add Content</div>
-      <div class="page-sub">Add knowledge to a client's chatbot</div>
-
-      <div class="panel">
-        <div class="panel-title">1. Select Client</div>
-        <div class="form-group">
-          <label>Client</label>
-          <select id="ingest-client-select">
-            <option value="">Loading clients...</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-title">2. Content Type</div>
-        <div class="ingest-sources">
-          <div class="source-btn active" onclick="setSource('faq', this)">
-            <span class="icon">❓</span> FAQ
-          </div>
-          <div class="source-btn" onclick="setSource('services', this)">
-            <span class="icon">🛠</span> Services
-          </div>
-          <div class="source-btn" onclick="setSource('pricing', this)">
-            <span class="icon">💰</span> Pricing
-          </div>
-          <div class="source-btn" onclick="setSource('about', this)">
-            <span class="icon">🏢</span> About
-          </div>
-          <div class="source-btn" onclick="setSource('policies', this)">
-            <span class="icon">📋</span> Policies
-          </div>
-          <div class="source-btn" onclick="setSource('contact', this)">
-            <span class="icon">📞</span> Contact
-          </div>
-          <div class="source-btn" onclick="setSource('manual', this)">
-            <span class="icon">✏️</span> Other
+        <div class="panel">
+          <div class="panel-title">Recent Clients</div>
+          <div id="dashboard-clients-list">
+            <div class="empty-state">
+              <div class="spinner"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="panel">
-        <div class="panel-title">3. Paste Content</div>
-        <div class="form-group" style="margin-bottom: 16px;">
-          <label>Content</label>
-          <textarea id="ingest-content" rows="10"
-            placeholder="Paste the content here. You can paste entire paragraphs, FAQs, service descriptions, pricing tables — anything you want the chatbot to know.
+      <!-- ── Clients ──────────────────────────────────────── -->
+      <div class="page" id="page-clients">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="page-title">Clients</div>
+            <div class="page-sub">Manage all your chatbot clients</div>
+          </div>
+          <button class="btn btn-primary" onclick="openNewClientModal()">+ New Client</button>
+        </div>
+        <div class="clients-grid" id="clients-grid">
+          <div class="empty-state">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Ingest ───────────────────────────────────────── -->
+      <div class="page" id="page-ingest">
+        <div class="page-title">Add Content</div>
+        <div class="page-sub">Add knowledge to a client's chatbot</div>
+
+        <div class="panel">
+          <div class="panel-title">1. Select Client</div>
+          <div class="form-group">
+            <label>Client</label>
+            <select id="ingest-client-select">
+              <option value="">Loading clients...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">2. Content Type</div>
+          <div class="ingest-sources">
+            <div class="source-btn active" onclick="setSource('faq', this)">
+              <span class="icon">❓</span> FAQ
+            </div>
+            <div class="source-btn" onclick="setSource('services', this)">
+              <span class="icon">🛠</span> Services
+            </div>
+            <div class="source-btn" onclick="setSource('pricing', this)">
+              <span class="icon">💰</span> Pricing
+            </div>
+            <div class="source-btn" onclick="setSource('about', this)">
+              <span class="icon">🏢</span> About
+            </div>
+            <div class="source-btn" onclick="setSource('policies', this)">
+              <span class="icon">📋</span> Policies
+            </div>
+            <div class="source-btn" onclick="setSource('contact', this)">
+              <span class="icon">📞</span> Contact
+            </div>
+            <div class="source-btn" onclick="setSource('manual', this)">
+              <span class="icon">✏️</span> Other
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">3. Paste Content</div>
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label>Content</label>
+            <textarea id="ingest-content" rows="10" placeholder="Paste the content here. You can paste entire paragraphs, FAQs, service descriptions, pricing tables — anything you want the chatbot to know.
 
 Example:
 Q: What are your hours?
@@ -745,284 +924,429 @@ A: We're open Monday to Saturday, 9am to 7pm IST. Closed on Sundays and national
 
 Q: Do you offer home visits?
 A: Yes! We offer home visits within 10km of our office for an additional ₹200 travel charge."></textarea>
-        </div>
-        <div class="flex gap-2">
-          <button class="btn btn-primary" onclick="handleIngest()">
-            ⊕ Add to Knowledge Base
-          </button>
-          <button class="btn btn-ghost" onclick="loadChunks()">
-            View existing content
-          </button>
-        </div>
-      </div>
-
-      <div id="chunks-panel" style="display:none;">
-        <div class="panel">
-          <div class="panel-title flex justify-between items-center">
-            <span>Existing Knowledge Chunks</span>
-            <button class="btn btn-danger btn-sm" onclick="clearChunks()">Clear All</button>
           </div>
-          <div class="chunks-list" id="chunks-list"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Embed ─────────────────────────────────────────── -->
-    <div class="page" id="page-embed">
-      <div class="page-title">Embed Code</div>
-      <div class="page-sub">Get the snippet to paste into any client's website</div>
-
-      <div class="panel">
-        <div class="panel-title">Select Client</div>
-        <div class="form-group" style="margin-bottom: 0;">
-          <select id="embed-client-select" onchange="updateEmbedCode()">
-            <option value="">Select a client...</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="embed-output" style="display:none;">
-        <div class="panel">
-          <div class="panel-title">Script Tag</div>
-          <p class="text-dim" style="font-size:13px; margin-bottom: 14px;">
-            Paste this single line before the <code style="color: var(--accent2);">&lt;/body&gt;</code> tag on the client's website. That's all they need.
-          </p>
-          <div class="code-block" style="position: relative;">
-            <span id="embed-code-display"></span>
-            <button class="copy-btn" onclick="copyEmbed()">Copy</button>
+          <div class="flex gap-2">
+            <button class="btn btn-primary" onclick="handleIngest()">
+              ⊕ Add to Knowledge Base
+            </button>
+            <button class="btn btn-ghost" onclick="loadChunks()">
+              View existing content
+            </button>
           </div>
         </div>
 
-        <div class="panel">
-          <div class="panel-title">What it does</div>
-          <p class="text-dim" style="font-size: 13px; line-height: 1.7;">
-            The script loads asynchronously — it won't slow down the client's page.
-            On load, it fetches their brand config (colors, name, welcome message) from your backend
-            and injects a floating chat bubble styled to match their brand.
-            All conversations go through your backend — the client never needs to touch any code again.
-          </p>
-        </div>
-
-        <div class="panel">
-          <div class="panel-title">WordPress / Webflow / Wix</div>
-          <p class="text-dim" style="font-size: 13px; margin-bottom: 12px;">
-            For no-code platforms, use the Custom Code / Header-Footer plugin to inject it:
-          </p>
-          <ul style="color: var(--text-dim); font-size: 13px; padding-left: 20px; line-height: 2;">
-            <li><strong style="color: var(--text);">WordPress:</strong> Appearance → Theme Editor → footer.php, before &lt;/body&gt;</li>
-            <li><strong style="color: var(--text);">Webflow:</strong> Project Settings → Custom Code → Footer Code</li>
-            <li><strong style="color: var(--text);">Wix:</strong> Settings → Advanced → Custom Code → Body - end</li>
-            <li><strong style="color: var(--text);">Shopify:</strong> Online Store → Themes → Edit Code → theme.liquid, before &lt;/body&gt;</li>
-          </ul>
+        <div id="chunks-panel" style="display:none;">
+          <div class="panel">
+            <div class="panel-title flex justify-between items-center">
+              <span>Existing Knowledge Chunks</span>
+              <button class="btn btn-danger btn-sm" onclick="clearChunks()">Clear All</button>
+            </div>
+            <div class="chunks-list" id="chunks-list"></div>
+          </div>
         </div>
       </div>
-    </div>
 
+      <!-- ── Embed ─────────────────────────────────────────── -->
+      <div class="page" id="page-embed">
+        <div class="page-title">Embed Code</div>
+        <div class="page-sub">Get the snippet to paste into any client's website</div>
+
+        <div class="panel">
+          <div class="panel-title">Select Client</div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <select id="embed-client-select" onchange="updateEmbedCode()">
+              <option value="">Select a client...</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="embed-output" style="display:none;">
+          <div class="panel">
+            <div class="panel-title">Script Tag</div>
+            <p class="text-dim" style="font-size:13px; margin-bottom: 14px;">
+              Paste this single line before the <code style="color: var(--accent2);">&lt;/body&gt;</code> tag on the
+              client's website. That's all they need.
+            </p>
+            <div class="code-block" style="position: relative;">
+              <span id="embed-code-display"></span>
+              <button class="copy-btn" onclick="copyEmbed()">Copy</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">What it does</div>
+            <p class="text-dim" style="font-size: 13px; line-height: 1.7;">
+              The script loads asynchronously — it won't slow down the client's page.
+              On load, it fetches their brand config (colors, name, welcome message) from your backend
+              and injects a floating chat bubble styled to match their brand.
+              All conversations go through your backend — the client never needs to touch any code again.
+            </p>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">WordPress / Webflow / Wix</div>
+            <p class="text-dim" style="font-size: 13px; margin-bottom: 12px;">
+              For no-code platforms, use the Custom Code / Header-Footer plugin to inject it:
+            </p>
+            <ul style="color: var(--text-dim); font-size: 13px; padding-left: 20px; line-height: 2;">
+              <li><strong style="color: var(--text);">WordPress:</strong> Appearance → Theme Editor → footer.php, before
+                &lt;/body&gt;</li>
+              <li><strong style="color: var(--text);">Webflow:</strong> Project Settings → Custom Code → Footer Code
+              </li>
+              <li><strong style="color: var(--text);">Wix:</strong> Settings → Advanced → Custom Code → Body - end</li>
+              <li><strong style="color: var(--text);">Shopify:</strong> Online Store → Themes → Edit Code →
+                theme.liquid, before &lt;/body&gt;</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 
-<!-- ═══════════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════════════════
   NEW CLIENT MODAL
 ══════════════════════════════════════════════════════════════ -->
-<div class="modal-overlay" id="modal-new-client">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">New Client</div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div class="form-grid">
-      <div class="form-group">
-        <label>Business Name *</label>
-        <input type="text" id="nc-name" placeholder="Sharma Plumbing Services" oninput="autoSlug()" />
+  <div class="modal-overlay" id="modal-new-client">
+    <div class="modal" style="width: 680px;">
+      <div class="modal-header">
+        <div class="modal-title">New Client</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
-      <div class="form-group">
-        <label>Client ID *</label>
-        <input type="text" id="nc-id" placeholder="sharma-plumbing" style="font-family: 'DM Mono', monospace;" />
+
+      <!-- Section tabs -->
+      <div
+        style="display:flex; gap:4px; margin-bottom:22px; background:var(--surface2); padding:4px; border-radius:8px; width:fit-content;">
+        <button class="modal-tab active" onclick="showModalTab('basic', this)">Business</button>
+        <button class="modal-tab" onclick="showModalTab('widget', this)">Widget</button>
+        <button class="modal-tab" onclick="showModalTab('leads', this)">Lead Capture</button>
       </div>
-      <div class="form-group">
-        <label>Business Type</label>
-        <input type="text" id="nc-type" placeholder="plumbing company" />
-      </div>
-      <div class="form-group">
-        <label>Tone</label>
-        <select id="nc-tone">
-          <option value="friendly">Friendly</option>
-          <option value="professional">Professional</option>
-          <option value="casual">Casual</option>
-          <option value="formal">Formal</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Contact Email</label>
-        <input type="email" id="nc-email" placeholder="hello@business.in" />
-      </div>
-      <div class="form-group">
-        <label>Business Hours</label>
-        <input type="text" id="nc-hours" placeholder="Mon–Sat, 9am–7pm IST" />
-      </div>
-      <div class="form-group full">
-        <label>Welcome Message</label>
-        <input type="text" id="nc-welcome" placeholder="Hi! How can I help you today?" />
-      </div>
-      <div class="form-group full">
-        <label>Fallback Message (when AI doesn't know)</label>
-        <input type="text" id="nc-fallback" placeholder="I don't have that info — please email us at hello@business.in" />
-      </div>
-      <div class="form-group">
-        <label>Primary Color</label>
-        <div class="color-row">
-          <input type="color" id="nc-color-picker" value="#2563eb" oninput="syncColor()" />
-          <input type="text" id="nc-color" value="#2563eb" oninput="syncColorPicker()" />
+
+      <!-- ── Tab: Business Info ───────────────────── -->
+      <div class="modal-section active" id="mt-basic">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" id="nc-name" placeholder="Sharma Plumbing Services" oninput="autoSlug()" />
+          </div>
+          <div class="form-group">
+            <label>Client ID *</label>
+            <input type="text" id="nc-id" placeholder="sharma-plumbing" style="font-family:'DM Mono',monospace;" />
+          </div>
+          <div class="form-group">
+            <label>Business Type</label>
+            <input type="text" id="nc-type" placeholder="plumbing company" />
+          </div>
+          <div class="form-group">
+            <label>Tone</label>
+            <select id="nc-tone">
+              <option value="friendly">Friendly</option>
+              <option value="professional">Professional</option>
+              <option value="casual">Casual</option>
+              <option value="formal">Formal</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Contact Email</label>
+            <input type="email" id="nc-email" placeholder="hello@business.in" />
+          </div>
+          <div class="form-group">
+            <label>Notification Email</label>
+            <input type="email" id="nc-notify-email" placeholder="owner@business.in (for lead alerts)" />
+          </div>
+          <div class="form-group full">
+            <label>Business Hours</label>
+            <input type="text" id="nc-hours" placeholder="Mon–Sat, 9am–7pm IST" />
+          </div>
+          <div class="form-group full">
+            <label>Welcome Message</label>
+            <input type="text" id="nc-welcome" placeholder="Hi! How can I help you today?" />
+          </div>
+          <div class="form-group full">
+            <label>Fallback Message (when AI doesn't know)</label>
+            <input type="text" id="nc-fallback"
+              placeholder="I don't have that info — please email us at hello@business.in" />
+          </div>
+          <div class="form-group full">
+            <label>Custom Instructions (optional)</label>
+            <textarea id="nc-custom" rows="3"
+              placeholder="e.g. Always mention our current offer. Never quote prices — direct them to call us."></textarea>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label>Bubble Label</label>
-        <input type="text" id="nc-label" placeholder="Chat with us" />
+
+      <!-- ── Tab: Widget Appearance ──────────────── -->
+      <div class="modal-section" id="mt-widget">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Theme</label>
+            <select id="nc-theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Font</label>
+            <select id="nc-font">
+              <option value="system">System (default)</option>
+              <option value="serif">Serif</option>
+              <option value="mono">Monospace</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Primary Color</label>
+            <div class="color-row">
+              <input type="color" id="nc-color-picker" value="#2563eb" oninput="syncColor()" />
+              <input type="text" id="nc-color" value="#2563eb" oninput="syncColorPicker()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Chat BG Color</label>
+            <div class="color-row">
+              <input type="color" id="nc-chatbg-picker" value="#ffffff" oninput="syncChatBg()" />
+              <input type="text" id="nc-chatbg" value="" placeholder="Leave empty for theme default"
+                oninput="syncChatBgPicker()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Bot Bubble Color</label>
+            <div class="color-row">
+              <input type="color" id="nc-botbubble-picker" value="#f1f5f9" oninput="syncBotBubble()" />
+              <input type="text" id="nc-botbubble" value="" placeholder="Leave empty for theme default"
+                oninput="syncBotBubblePicker()" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Bubble Style</label>
+            <select id="nc-bubble-style">
+              <option value="circle">Circle</option>
+              <option value="rounded-square">Rounded Square</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bubble Icon</label>
+            <select id="nc-bubble-icon">
+              <option value="chat">Chat (default)</option>
+              <option value="question">Question mark</option>
+              <option value="smile">Smile</option>
+              <option value="headset">Headset</option>
+              <option value="custom">Custom emoji...</option>
+            </select>
+          </div>
+          <div class="form-group" id="nc-emoji-group" style="display:none;">
+            <label>Custom Emoji</label>
+            <input type="text" id="nc-emoji" placeholder="e.g. 🤖 👋 💬" />
+          </div>
+          <div class="form-group">
+            <label>Bubble Position</label>
+            <select id="nc-position">
+              <option value="right">Right (default)</option>
+              <option value="left">Left</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Bubble Label</label>
+            <input type="text" id="nc-label" placeholder="Chat with us" />
+          </div>
+          <div class="form-group full">
+            <label>Logo URL (shown in chat header)</label>
+            <input type="text" id="nc-logo" placeholder="https://yourdomain.com/logo.png" />
+          </div>
+          <div class="form-group full">
+            <label>Avatar URL (shown on bubble button — overrides icon)</label>
+            <input type="text" id="nc-avatar" placeholder="https://yourdomain.com/photo.jpg" />
+          </div>
+          <div class="form-group full" style="display:flex; gap:24px; align-items:center;">
+            <label
+              style="display:flex; align-items:center; gap:8px; text-transform:none; font-size:13px; cursor:pointer;">
+              <input type="checkbox" id="nc-show-label" checked /> Show bubble label
+            </label>
+            <label
+              style="display:flex; align-items:center; gap:8px; text-transform:none; font-size:13px; cursor:pointer;">
+              <input type="checkbox" id="nc-show-branding" checked /> Show "Powered by AI" footer
+            </label>
+            <label
+              style="display:flex; align-items:center; gap:8px; text-transform:none; font-size:13px; cursor:pointer;">
+              <input type="checkbox" id="nc-show-status" checked /> Show online status dot
+            </label>
+          </div>
+        </div>
       </div>
-      <div class="form-group full">
-        <label>Custom Instructions (optional)</label>
-        <textarea id="nc-custom" rows="3" placeholder="e.g. Always mention our current offer. Never quote prices — direct them to call us."></textarea>
+
+      <!-- ── Tab: Lead Capture ───────────────────── -->
+      <div class="modal-section" id="mt-leads">
+        <div class="form-grid">
+          <div class="form-group full" style="display:flex; align-items:center; gap:10px;">
+            <input type="checkbox" id="nc-lead-enabled" onchange="toggleLeadFields()" style="width:auto;" />
+            <label style="text-transform:none; font-size:14px; cursor:pointer;" for="nc-lead-enabled">
+              Enable lead capture for this client
+            </label>
+          </div>
+          <div id="nc-lead-fields" style="display:contents; opacity:0.4; pointer-events:none;">
+            <div class="form-group">
+              <label>Trigger</label>
+              <select id="nc-lead-trigger">
+                <option value="after_messages">After N messages</option>
+                <option value="on_fallback">When bot doesn't know</option>
+                <option value="always">Always (show immediately)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Show after how many messages</label>
+              <input type="number" id="nc-lead-after" value="3" min="1" max="20" />
+            </div>
+            <div class="form-group full">
+              <label>Form Heading</label>
+              <input type="text" id="nc-lead-heading" placeholder="Before I continue..." />
+            </div>
+            <div class="form-group full">
+              <label>Form Subtext</label>
+              <input type="text" id="nc-lead-subtext"
+                placeholder="Leave your details and we'll follow up personally." />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <hr class="divider" />
-    <div class="flex gap-2 justify-between">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="createClient()">Create Client →</button>
+
+      <hr class="divider" />
+      <div class="flex gap-2 justify-between">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="createClient()">Create Client →</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Toast -->
-<div id="toast"></div>
+  <!-- Toast -->
+  <div id="toast"></div>
 
-<script>
-// ═══════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════
-let API = "";
-let SECRET = "";
-let clients = [];
-let currentIngestSource = "faq";
+  <script>
+    // ═══════════════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════════════
+    let API = "";
+    let SECRET = "";
+    let clients = [];
+    let currentIngestSource = "faq";
 
-// ═══════════════════════════════════════════════════════════
-// AUTH
-// ═══════════════════════════════════════════════════════════
-async function handleLogin() {
-  const secret = document.getElementById("login-secret").value.trim();
-  const url = document.getElementById("login-url").value.trim().replace(/\/$/, "");
-  const errEl = document.getElementById("login-error");
+    // ═══════════════════════════════════════════════════════════
+    // AUTH
+    // ═══════════════════════════════════════════════════════════
+    async function handleLogin() {
+      const secret = document.getElementById("login-secret").value.trim();
+      const url = document.getElementById("login-url").value.trim().replace(/\/$/, "");
+      const errEl = document.getElementById("login-error");
 
-  if (!secret || !url) {
-    errEl.textContent = "Please fill in both fields.";
-    errEl.style.display = "block";
-    return;
-  }
+      if (!secret || !url) {
+        errEl.textContent = "Please fill in both fields.";
+        errEl.style.display = "block";
+        return;
+      }
 
-  try {
-    const res = await fetch(`${url}/api/admin/clients`, {
-      headers: { "x-admin-secret": secret }
-    });
+      try {
+        const res = await fetch(`${url}/api/admin/clients`, {
+          headers: { "x-admin-secret": secret }
+        });
 
-    if (res.status === 401) {
-      errEl.textContent = "Wrong admin secret.";
-      errEl.style.display = "block";
-      return;
+        if (res.status === 401) {
+          errEl.textContent = "Wrong admin secret.";
+          errEl.style.display = "block";
+          return;
+        }
+
+        if (!res.ok) throw new Error("Backend not reachable");
+
+        API = url;
+        SECRET = secret;
+        errEl.style.display = "none";
+
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+
+        loadAllData();
+      } catch (err) {
+        errEl.textContent = "Cannot reach backend. Check the URL and make sure it's running.";
+        errEl.style.display = "block";
+      }
     }
 
-    if (!res.ok) throw new Error("Backend not reachable");
+    document.getElementById("login-secret").addEventListener("keydown", e => {
+      if (e.key === "Enter") handleLogin();
+    });
 
-    API = url;
-    SECRET = secret;
-    errEl.style.display = "none";
+    function handleLogout() {
+      API = ""; SECRET = ""; clients = [];
+      document.getElementById("app").style.display = "none";
+      document.getElementById("login-screen").style.display = "flex";
+    }
 
-    document.getElementById("login-screen").style.display = "none";
-    document.getElementById("app").style.display = "block";
+    // ═══════════════════════════════════════════════════════════
+    // DATA
+    // ═══════════════════════════════════════════════════════════
+    async function api(path, opts = {}) {
+      const res = await fetch(`${API}${path}`, {
+        ...opts,
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-secret": SECRET,
+          ...(opts.headers || {}),
+        },
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+      return res.json();
+    }
 
-    loadAllData();
-  } catch (err) {
-    errEl.textContent = "Cannot reach backend. Check the URL and make sure it's running.";
-    errEl.style.display = "block";
-  }
-}
+    async function loadAllData() {
+      try {
+        const data = await api("/api/admin/clients");
+        clients = data.clients || [];
+        renderDashboard();
+        renderClients();
+        populateSelects();
+      } catch (err) {
+        showToast("Failed to load clients: " + err.message, "error");
+      }
+    }
 
-document.getElementById("login-secret").addEventListener("keydown", e => {
-  if (e.key === "Enter") handleLogin();
-});
+    // ═══════════════════════════════════════════════════════════
+    // NAVIGATION
+    // ═══════════════════════════════════════════════════════════
+    function showPage(name) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+      document.getElementById(`page-${name}`).classList.add("active");
+      document.getElementById(`nav-${name}`).classList.add("active");
+    }
 
-function handleLogout() {
-  API = ""; SECRET = ""; clients = [];
-  document.getElementById("app").style.display = "none";
-  document.getElementById("login-screen").style.display = "flex";
-}
+    // ═══════════════════════════════════════════════════════════
+    // DASHBOARD
+    // ═══════════════════════════════════════════════════════════
+    function renderDashboard() {
+      const totalChunks = clients.reduce((s, c) => s + (c.chunk_count || 0), 0);
+      document.getElementById("stat-clients").textContent = clients.length;
+      document.getElementById("stat-chunks").textContent = totalChunks;
 
-// ═══════════════════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════════════════
-async function api(path, opts = {}) {
-  const res = await fetch(`${API}${path}`, {
-    ...opts,
-    headers: {
-      "Content-Type": "application/json",
-      "x-admin-secret": SECRET,
-      ...(opts.headers || {}),
-    },
-  });
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    throw new Error(data.error || `HTTP ${res.status}`);
-  }
-  return res.json();
-}
+      const thisMonth = clients.filter(c => {
+        const d = new Date(c.created_at);
+        const now = new Date();
+        return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+      }).length;
+      document.getElementById("stat-active").textContent = thisMonth;
 
-async function loadAllData() {
-  try {
-    const data = await api("/api/admin/clients");
-    clients = data.clients || [];
-    renderDashboard();
-    renderClients();
-    populateSelects();
-  } catch (err) {
-    showToast("Failed to load clients: " + err.message, "error");
-  }
-}
+      const el = document.getElementById("dashboard-clients-list");
+      if (!clients.length) {
+        el.innerHTML = `<div class="empty-state"><div class="big">◈</div><p>No clients yet. Create your first one.</p></div>`;
+        return;
+      }
 
-// ═══════════════════════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════════════════════
-function showPage(name) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-  document.getElementById(`page-${name}`).classList.add("active");
-  document.getElementById(`nav-${name}`).classList.add("active");
-}
+      el.innerHTML = clients.slice(0, 5).map(c => clientRowHTML(c)).join("");
+    }
 
-// ═══════════════════════════════════════════════════════════
-// DASHBOARD
-// ═══════════════════════════════════════════════════════════
-function renderDashboard() {
-  const totalChunks = clients.reduce((s, c) => s + (c.chunk_count || 0), 0);
-  document.getElementById("stat-clients").textContent = clients.length;
-  document.getElementById("stat-chunks").textContent = totalChunks;
-
-  const thisMonth = clients.filter(c => {
-    const d = new Date(c.created_at);
-    const now = new Date();
-    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
-  }).length;
-  document.getElementById("stat-active").textContent = thisMonth;
-
-  const el = document.getElementById("dashboard-clients-list");
-  if (!clients.length) {
-    el.innerHTML = `<div class="empty-state"><div class="big">◈</div><p>No clients yet. Create your first one.</p></div>`;
-    return;
-  }
-
-  el.innerHTML = clients.slice(0, 5).map(c => clientRowHTML(c)).join("");
-}
-
-function clientRowHTML(c) {
-  const initials = c.business_name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
-  return `
+    function clientRowHTML(c) {
+      const initials = c.business_name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+      return `
     <div style="display:flex; align-items:center; gap:12px; padding: 12px 0; border-bottom: 1px solid var(--border);">
       <div class="client-dot" style="background: ${c.primary_color || '#2563eb'}">${initials}</div>
       <div style="flex:1;">
@@ -1032,23 +1356,23 @@ function clientRowHTML(c) {
       <div class="tag blue">${c.chunk_count || 0} chunks</div>
       <div class="tag">${c.tone}</div>
     </div>`;
-}
+    }
 
-// ═══════════════════════════════════════════════════════════
-// CLIENTS GRID
-// ═══════════════════════════════════════════════════════════
-function renderClients() {
-  const grid = document.getElementById("clients-grid");
-  if (!clients.length) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><div class="big">◈</div><p>No clients yet.</p><br><button class="btn btn-primary" onclick="openNewClientModal()">+ Add First Client</button></div>`;
-    return;
-  }
-  grid.innerHTML = clients.map(c => clientCardHTML(c)).join("");
-}
+    // ═══════════════════════════════════════════════════════════
+    // CLIENTS GRID
+    // ═══════════════════════════════════════════════════════════
+    function renderClients() {
+      const grid = document.getElementById("clients-grid");
+      if (!clients.length) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><div class="big">◈</div><p>No clients yet.</p><br><button class="btn btn-primary" onclick="openNewClientModal()">+ Add First Client</button></div>`;
+        return;
+      }
+      grid.innerHTML = clients.map(c => clientCardHTML(c)).join("");
+    }
 
-function clientCardHTML(c) {
-  const initials = c.business_name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
-  return `
+    function clientCardHTML(c) {
+      const initials = c.business_name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
+      return `
     <div class="client-card">
       <div class="client-card-header">
         <div class="client-dot" style="background: ${c.primary_color || '#2563eb'}">${initials}</div>
@@ -1068,208 +1392,277 @@ function clientCardHTML(c) {
         <button class="btn btn-danger btn-sm" onclick="deleteClient('${c.business_id}', '${c.business_name}')">✕</button>
       </div>
     </div>`;
-}
-
-function goToIngest(id) {
-  showPage("ingest");
-  setTimeout(() => {
-    document.getElementById("ingest-client-select").value = id;
-  }, 50);
-}
-
-function goToEmbed(id) {
-  showPage("embed");
-  setTimeout(() => {
-    document.getElementById("embed-client-select").value = id;
-    updateEmbedCode();
-  }, 50);
-}
-
-async function deleteClient(id, name) {
-  if (!confirm(`Delete ${name} and all their knowledge? This cannot be undone.`)) return;
-  try {
-    await api(`/api/admin/clients/${id}`, { method: "DELETE" });
-    showToast(`${name} deleted.`, "success");
-    loadAllData();
-  } catch (err) {
-    showToast("Delete failed: " + err.message, "error");
-  }
-}
-
-// ═══════════════════════════════════════════════════════════
-// NEW CLIENT MODAL
-// ═══════════════════════════════════════════════════════════
-function openNewClientModal() {
-  document.getElementById("modal-new-client").classList.add("open");
-}
-
-function closeModal() {
-  document.getElementById("modal-new-client").classList.remove("open");
-}
-
-function autoSlug() {
-  const name = document.getElementById("nc-name").value;
-  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  document.getElementById("nc-id").value = slug;
-}
-
-function syncColor() {
-  document.getElementById("nc-color").value = document.getElementById("nc-color-picker").value;
-}
-
-function syncColorPicker() {
-  const val = document.getElementById("nc-color").value;
-  if (/^#[0-9a-f]{6}$/i.test(val)) {
-    document.getElementById("nc-color-picker").value = val;
-  }
-}
-
-async function createClient() {
-  const payload = {
-    business_id: document.getElementById("nc-id").value.trim(),
-    business_name: document.getElementById("nc-name").value.trim(),
-    business_type: document.getElementById("nc-type").value.trim(),
-    tone: document.getElementById("nc-tone").value,
-    contact_email: document.getElementById("nc-email").value.trim(),
-    business_hours: document.getElementById("nc-hours").value.trim(),
-    welcome_message: document.getElementById("nc-welcome").value.trim(),
-    fallback_message: document.getElementById("nc-fallback").value.trim(),
-    primary_color: document.getElementById("nc-color").value.trim(),
-    chat_bubble_label: document.getElementById("nc-label").value.trim(),
-    custom_instructions: document.getElementById("nc-custom").value.trim(),
-  };
-
-  if (!payload.business_id || !payload.business_name) {
-    showToast("Business name and ID are required.", "error");
-    return;
-  }
-
-  try {
-    await api("/api/admin/clients", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    });
-    showToast(`${payload.business_name} created!`, "success");
-    closeModal();
-    loadAllData();
-  } catch (err) {
-    showToast("Error: " + err.message, "error");
-  }
-}
-
-// ═══════════════════════════════════════════════════════════
-// INGEST
-// ═══════════════════════════════════════════════════════════
-function setSource(source, el) {
-  currentIngestSource = source;
-  document.querySelectorAll(".source-btn").forEach(b => b.classList.remove("active"));
-  el.classList.add("active");
-}
-
-async function handleIngest() {
-  const businessId = document.getElementById("ingest-client-select").value;
-  const content = document.getElementById("ingest-content").value.trim();
-
-  if (!businessId) { showToast("Select a client first.", "error"); return; }
-  if (!content) { showToast("Paste some content first.", "error"); return; }
-
-  try {
-    const data = await api("/api/ingest", {
-      method: "POST",
-      body: JSON.stringify({ businessId, content, source: currentIngestSource }),
-    });
-    showToast(`✓ ${data.chunksStored} chunks added to ${businessId}`, "success");
-    document.getElementById("ingest-content").value = "";
-    loadAllData();
-  } catch (err) {
-    showToast("Ingest failed: " + err.message, "error");
-  }
-}
-
-async function loadChunks() {
-  const businessId = document.getElementById("ingest-client-select").value;
-  if (!businessId) { showToast("Select a client first.", "error"); return; }
-
-  document.getElementById("chunks-panel").style.display = "block";
-  document.getElementById("chunks-list").innerHTML = `<div style="text-align:center; padding: 20px;"><div class="spinner"></div></div>`;
-
-  try {
-    const data = await api(`/api/admin/clients/${businessId}/chunks`);
-    const chunks = data.chunks || [];
-
-    if (!chunks.length) {
-      document.getElementById("chunks-list").innerHTML = `<div class="empty-state" style="padding: 30px;">No content added yet.</div>`;
-      return;
     }
 
-    document.getElementById("chunks-list").innerHTML = chunks.map(c => `
+    function goToIngest(id) {
+      showPage("ingest");
+      setTimeout(() => {
+        document.getElementById("ingest-client-select").value = id;
+      }, 50);
+    }
+
+    function goToEmbed(id) {
+      showPage("embed");
+      setTimeout(() => {
+        document.getElementById("embed-client-select").value = id;
+        updateEmbedCode();
+      }, 50);
+    }
+
+    async function deleteClient(id, name) {
+      if (!confirm(`Delete ${name} and all their knowledge? This cannot be undone.`)) return;
+      try {
+        await api(`/api/admin/clients/${id}`, { method: "DELETE" });
+        showToast(`${name} deleted.`, "success");
+        loadAllData();
+      } catch (err) {
+        showToast("Delete failed: " + err.message, "error");
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // NEW CLIENT MODAL
+    // ═══════════════════════════════════════════════════════════
+    function openNewClientModal() {
+      document.getElementById("modal-new-client").classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("modal-new-client").classList.remove("open");
+    }
+
+    function autoSlug() {
+      const name = document.getElementById("nc-name").value;
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      document.getElementById("nc-id").value = slug;
+    }
+
+    function syncColor() {
+      document.getElementById("nc-color").value = document.getElementById("nc-color-picker").value;
+    }
+
+    function syncColorPicker() {
+      const val = document.getElementById("nc-color").value;
+      if (/^#[0-9a-f]{6}$/i.test(val)) {
+        document.getElementById("nc-color-picker").value = val;
+      }
+    }
+
+    // ── Modal tab switching ───────────────────────────────────────
+    function showModalTab(name, el) {
+      document.querySelectorAll(".modal-section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".modal-tab").forEach(t => t.classList.remove("active"));
+      document.getElementById(`mt-${name}`).classList.add("active");
+      el.classList.add("active");
+    }
+
+    // ── Color sync helpers ────────────────────────────────────────
+    function syncChatBg() {
+      document.getElementById("nc-chatbg").value = document.getElementById("nc-chatbg-picker").value;
+    }
+    function syncChatBgPicker() {
+      const val = document.getElementById("nc-chatbg").value;
+      if (/^#[0-9a-f]{6}$/i.test(val)) document.getElementById("nc-chatbg-picker").value = val;
+    }
+    function syncBotBubble() {
+      document.getElementById("nc-botbubble").value = document.getElementById("nc-botbubble-picker").value;
+    }
+    function syncBotBubblePicker() {
+      const val = document.getElementById("nc-botbubble").value;
+      if (/^#[0-9a-f]{6}$/i.test(val)) document.getElementById("nc-botbubble-picker").value = val;
+    }
+
+    // ── Show/hide custom emoji input ──────────────────────────────
+    document.addEventListener("change", function (e) {
+      if (e.target.id === "nc-bubble-icon") {
+        document.getElementById("nc-emoji-group").style.display =
+          e.target.value === "custom" ? "flex" : "none";
+      }
+    });
+
+    // ── Toggle lead capture fields ────────────────────────────────
+    function toggleLeadFields() {
+      const enabled = document.getElementById("nc-lead-enabled").checked;
+      const fields = document.getElementById("nc-lead-fields");
+      fields.style.opacity = enabled ? "1" : "0.4";
+      fields.style.pointerEvents = enabled ? "all" : "none";
+    }
+
+    async function createClient() {
+      // Resolve bubble icon — use custom emoji if selected
+      const iconSelect = document.getElementById("nc-bubble-icon").value;
+      const bubbleIcon = iconSelect === "custom"
+        ? document.getElementById("nc-emoji").value.trim()
+        : iconSelect;
+
+      const payload = {
+        // Business info
+        business_id: document.getElementById("nc-id").value.trim(),
+        business_name: document.getElementById("nc-name").value.trim(),
+        business_type: document.getElementById("nc-type").value.trim(),
+        tone: document.getElementById("nc-tone").value,
+        contact_email: document.getElementById("nc-email").value.trim(),
+        notification_email: document.getElementById("nc-notify-email").value.trim(),
+        business_hours: document.getElementById("nc-hours").value.trim(),
+        welcome_message: document.getElementById("nc-welcome").value.trim(),
+        fallback_message: document.getElementById("nc-fallback").value.trim(),
+        custom_instructions: document.getElementById("nc-custom").value.trim(),
+
+        // Widget appearance
+        theme: document.getElementById("nc-theme").value,
+        font_family: document.getElementById("nc-font").value,
+        primary_color: document.getElementById("nc-color").value.trim(),
+        chat_bg_color: document.getElementById("nc-chatbg").value.trim() || null,
+        bot_bubble_color: document.getElementById("nc-botbubble").value.trim() || null,
+        bubble_style: document.getElementById("nc-bubble-style").value,
+        bubble_icon: bubbleIcon,
+        bubble_position: document.getElementById("nc-position").value,
+        chat_bubble_label: document.getElementById("nc-label").value.trim(),
+        logo_url: document.getElementById("nc-logo").value.trim() || null,
+        avatar_url: document.getElementById("nc-avatar").value.trim() || null,
+        show_label: document.getElementById("nc-show-label").checked,
+        show_branding: document.getElementById("nc-show-branding").checked,
+        show_online_status: document.getElementById("nc-show-status").checked,
+
+        // Lead capture
+        lead_capture_enabled: document.getElementById("nc-lead-enabled").checked,
+        lead_capture_trigger: document.getElementById("nc-lead-trigger").value,
+        lead_capture_after: parseInt(document.getElementById("nc-lead-after").value) || 3,
+        lead_capture_heading: document.getElementById("nc-lead-heading").value.trim(),
+        lead_capture_subtext: document.getElementById("nc-lead-subtext").value.trim(),
+      };
+
+      if (!payload.business_id || !payload.business_name) {
+        showToast("Business name and ID are required.", "error");
+        return;
+      }
+
+      try {
+        await api("/api/admin/clients", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+        showToast(`${payload.business_name} created!`, "success");
+        closeModal();
+        loadAllData();
+      } catch (err) {
+        showToast("Error: " + err.message, "error");
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // INGEST
+    // ═══════════════════════════════════════════════════════════
+    function setSource(source, el) {
+      currentIngestSource = source;
+      document.querySelectorAll(".source-btn").forEach(b => b.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    async function handleIngest() {
+      const businessId = document.getElementById("ingest-client-select").value;
+      const content = document.getElementById("ingest-content").value.trim();
+
+      if (!businessId) { showToast("Select a client first.", "error"); return; }
+      if (!content) { showToast("Paste some content first.", "error"); return; }
+
+      try {
+        const data = await api("/api/ingest", {
+          method: "POST",
+          body: JSON.stringify({ businessId, content, source: currentIngestSource }),
+        });
+        showToast(`✓ ${data.chunksStored} chunks added to ${businessId}`, "success");
+        document.getElementById("ingest-content").value = "";
+        loadAllData();
+      } catch (err) {
+        showToast("Ingest failed: " + err.message, "error");
+      }
+    }
+
+    async function loadChunks() {
+      const businessId = document.getElementById("ingest-client-select").value;
+      if (!businessId) { showToast("Select a client first.", "error"); return; }
+
+      document.getElementById("chunks-panel").style.display = "block";
+      document.getElementById("chunks-list").innerHTML = `<div style="text-align:center; padding: 20px;"><div class="spinner"></div></div>`;
+
+      try {
+        const data = await api(`/api/admin/clients/${businessId}/chunks`);
+        const chunks = data.chunks || [];
+
+        if (!chunks.length) {
+          document.getElementById("chunks-list").innerHTML = `<div class="empty-state" style="padding: 30px;">No content added yet.</div>`;
+          return;
+        }
+
+        document.getElementById("chunks-list").innerHTML = chunks.map(c => `
       <div class="chunk-item">
         <div class="chunk-source">${c.source} · ${new Date(c.created_at).toLocaleDateString()}</div>
         <div class="chunk-text">${c.content}</div>
       </div>`).join("");
-  } catch (err) {
-    showToast("Failed to load chunks: " + err.message, "error");
-  }
-}
+      } catch (err) {
+        showToast("Failed to load chunks: " + err.message, "error");
+      }
+    }
 
-async function clearChunks() {
-  const businessId = document.getElementById("ingest-client-select").value;
-  if (!confirm(`Clear ALL knowledge for ${businessId}? This cannot be undone.`)) return;
+    async function clearChunks() {
+      const businessId = document.getElementById("ingest-client-select").value;
+      if (!confirm(`Clear ALL knowledge for ${businessId}? This cannot be undone.`)) return;
 
-  try {
-    await api(`/api/ingest/${businessId}`, { method: "DELETE" });
-    showToast("All chunks cleared.", "success");
-    document.getElementById("chunks-panel").style.display = "none";
-    loadAllData();
-  } catch (err) {
-    showToast("Error: " + err.message, "error");
-  }
-}
+      try {
+        await api(`/api/ingest/${businessId}`, { method: "DELETE" });
+        showToast("All chunks cleared.", "success");
+        document.getElementById("chunks-panel").style.display = "none";
+        loadAllData();
+      } catch (err) {
+        showToast("Error: " + err.message, "error");
+      }
+    }
 
-// ═══════════════════════════════════════════════════════════
-// EMBED
-// ═══════════════════════════════════════════════════════════
-function updateEmbedCode() {
-  const id = document.getElementById("embed-client-select").value;
-  const outputEl = document.getElementById("embed-output");
-  const codeEl = document.getElementById("embed-code-display");
+    // ═══════════════════════════════════════════════════════════
+    // EMBED
+    // ═══════════════════════════════════════════════════════════
+    function updateEmbedCode() {
+      const id = document.getElementById("embed-client-select").value;
+      const outputEl = document.getElementById("embed-output");
+      const codeEl = document.getElementById("embed-code-display");
 
-  if (!id) { outputEl.style.display = "none"; return; }
+      if (!id) { outputEl.style.display = "none"; return; }
 
-  outputEl.style.display = "block";
-  const code = `&lt;script\n  src="${API}/widget/chatbot.js"\n  data-business-id="${id}"\n&gt;&lt;/script&gt;`;
-  codeEl.innerHTML = code;
-}
+      outputEl.style.display = "block";
+      const code = `&lt;script\n  src="${API}/widget/chatbot.js"\n  data-business-id="${id}"\n&gt;&lt;/script&gt;`;
+      codeEl.innerHTML = code;
+    }
 
-function copyEmbed() {
-  const id = document.getElementById("embed-client-select").value;
-  if (!id) return;
-  const code = `<script\n  src="${API}/widget/chatbot.js"\n  data-business-id="${id}"\n><\/script>`;
-  navigator.clipboard.writeText(code).then(() => showToast("Copied to clipboard!", "success"));
-}
+    function copyEmbed() {
+      const id = document.getElementById("embed-client-select").value;
+      if (!id) return;
+      const code = `<script\n  src="${API}/widget/chatbot.js"\n  data-business-id="${id}"\n><\/script>`;
+      navigator.clipboard.writeText(code).then(() => showToast("Copied to clipboard!", "success"));
+    }
 
-// ═══════════════════════════════════════════════════════════
-// HELPERS
-// ═══════════════════════════════════════════════════════════
-function populateSelects() {
-  const opts = clients.map(c => `<option value="${c.business_id}">${c.business_name}</option>`).join("");
-  document.getElementById("ingest-client-select").innerHTML = `<option value="">Select a client...</option>` + opts;
-  document.getElementById("embed-client-select").innerHTML = `<option value="">Select a client...</option>` + opts;
-}
+    // ═══════════════════════════════════════════════════════════
+    // HELPERS
+    // ═══════════════════════════════════════════════════════════
+    function populateSelects() {
+      const opts = clients.map(c => `<option value="${c.business_id}">${c.business_name}</option>`).join("");
+      document.getElementById("ingest-client-select").innerHTML = `<option value="">Select a client...</option>` + opts;
+      document.getElementById("embed-client-select").innerHTML = `<option value="">Select a client...</option>` + opts;
+    }
 
-let toastTimer;
-function showToast(msg, type = "success") {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.className = `show ${type}`;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.className = ""; }, 3500);
-}
+    let toastTimer;
+    function showToast(msg, type = "success") {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.className = `show ${type}`;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { el.className = ""; }, 3500);
+    }
 
-// Close modal on overlay click
-document.getElementById("modal-new-client").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
-});
-</script>
+    // Close modal on overlay click
+    document.getElementById("modal-new-client").addEventListener("click", function (e) {
+      if (e.target === this) closeModal();
+    });
+  </script>
 </body>
 </html>

@@ -12,7 +12,9 @@ router.get("/:businessId", async (req, res) => {
     "chat_bubble_label, logo_url, avatar_url, theme, font_family, " +
     "bubble_style, bubble_icon, bubble_position, " +
     "show_label, show_branding, show_online_status, " +
-    "chat_bg_color, bot_bubble_color"
+    "chat_bg_color, bot_bubble_color, " +
+    "lead_capture_enabled, lead_capture_trigger, lead_capture_after, " +
+    "lead_capture_heading, lead_capture_subtext"
   )
   .eq("business_id", businessId)
   .single();
