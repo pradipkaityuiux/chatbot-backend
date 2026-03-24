@@ -14,7 +14,8 @@ router.get("/:businessId", async (req, res) => {
     "show_label, show_branding, show_online_status, " +
     "chat_bg_color, bot_bubble_color, " +
     "lead_capture_enabled, lead_capture_trigger, lead_capture_after, " +
-    "lead_capture_heading, lead_capture_subtext"
+    "lead_capture_heading, lead_capture_subtext, " +
+    "auto_open, auto_open_delay"
   )
   .eq("business_id", businessId)
   .single();

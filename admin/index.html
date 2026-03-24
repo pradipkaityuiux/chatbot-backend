@@ -1156,6 +1156,15 @@ A: Yes! We offer home visits within 10km of our office for an additional ₹200 
             <label>Avatar URL (shown on bubble button — overrides icon)</label>
             <input type="text" id="nc-avatar" placeholder="https://yourdomain.com/photo.jpg" />
           </div>
+          <div class="form-group full" style="display:flex; gap:24px; align-items:center; flex-wrap:wrap;">
+            <label style="display:flex; align-items:center; gap:8px; text-transform:none; font-size:13px; cursor:pointer;">
+              <input type="checkbox" id="nc-auto-open" /> Auto open on page load
+            </label>
+          </div>
+          <div class="form-group" id="nc-auto-delay-group" style="display:none;">
+            <label>Auto open delay (seconds)</label>
+            <input type="number" id="nc-auto-delay" value="3" min="0" max="30" />
+          </div>
           <div class="form-group full" style="display:flex; gap:24px; align-items:center;">
             <label
               style="display:flex; align-items:center; gap:8px; text-transform:none; font-size:13px; cursor:pointer;">
@@ -1480,6 +1489,14 @@ A: Yes! We offer home visits within 10km of our office for an additional ₹200 
       }
     });
 
+    //  Show the delay field only when auto open is checked
+    document.addEventListener("change", function(e) {
+      if (e.target.id === "nc-auto-open") {
+        document.getElementById("nc-auto-delay-group").style.display =
+          e.target.checked ? "flex" : "none";
+      }
+    });
+
     // ── Toggle lead capture fields ────────────────────────────────
     function toggleLeadFields() {
       const enabled = document.getElementById("nc-lead-enabled").checked;
@@ -1522,6 +1539,8 @@ A: Yes! We offer home visits within 10km of our office for an additional ₹200 
         avatar_url: document.getElementById("nc-avatar").value.trim() || null,
         show_label: document.getElementById("nc-show-label").checked,
         show_branding: document.getElementById("nc-show-branding").checked,
+        auto_open: document.getElementById("nc-auto-open").checked,
+        auto_open_delay: parseInt(document.getElementById("nc-auto-delay").value) || 3,
         show_online_status: document.getElementById("nc-show-status").checked,
 
         // Lead capture

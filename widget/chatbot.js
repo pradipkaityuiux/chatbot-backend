@@ -54,6 +54,8 @@
     lead_capture_after: 3,
     lead_capture_heading: 'Before I continue...',
     lead_capture_subtext: 'Leave your details and we\'ll follow up personally.',
+    auto_open: false,
+    auto_open_delay: 3,
   };
 
   const fontMap = {
@@ -428,6 +430,13 @@
     buildWidget();
     bindEvents();
     setTimeout(() => addMessage("bot", config.welcome_message), 500);
+
+    // Auto open if configured
+    if (config.auto_open) {
+      setTimeout(() => {
+        if (!isOpen) toggleChat();
+      }, (config.auto_open_delay || 3) * 1000);
+    }
   }
 
   if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); }
